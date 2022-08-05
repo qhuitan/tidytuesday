@@ -234,18 +234,36 @@ subtitle <- ggdraw() +
     plot.margin = margin(0, 0, 0, 0)
   )
 
+caption <- ggdraw() + 
+  draw_label(
+    "Graphic: @qhuitan | Source: USGS.gov @FGazzelloni",
+    x = 0.99,
+    fontface = "italic",
+    hjust = 1,
+    size = 8
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 0)
+  )
+
+
+
 
 
 hab_plots <- plot_grid(
-  title, subtitle, plot_row,
+  title, subtitle, plot_row, caption,
   ncol = 1,
   # rel_heights values control vertical title margins
-  rel_heights = c(0.05, 0.05, 1)
+  rel_heights = c(0.05, 0.05, 1, 0.05)
 )
+
+hab_plots
 
 
 # Saving plot
-tiff(file = "hab.tiff", width = 12, height=8, units="in", res=100)
+png(file = "hab.png", width = 12, height=8, units="in", res=100)
 
 hab_plots
 
@@ -420,7 +438,7 @@ mig <- p +
 mig
 
 # Saving plot
-tiff(file = "mig.tiff", width = 8, height=8, units="in", res=100)
+png(file = "mig.png", width = 8, height=8, units="in", res=100)
 
 mig
 
